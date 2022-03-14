@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.hh.common.bean.ModelPath
@@ -189,12 +188,11 @@ fun ShareListItem(
                     )
                 } else {
                     Row(Modifier.padding(top = 12.dp)) {
-                        Image(
-                            rememberImagePainter(envelopePic, builder = {
-                                error(R.mipmap.ic_default_round)
-                            }),
-                            contentDescription = "", Modifier.size(100.dp),
+                        NetworkImage(
+                            envelopePic,
+                            Modifier.size(100.dp),
                             contentScale = ContentScale.Crop,
+                            defaultImg = R.mipmap.ic_default_round
                         )
                         Column(Modifier.padding(start = 8.dp)) {
                             Text(

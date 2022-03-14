@@ -19,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
 import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CpNavigation
@@ -74,12 +73,11 @@ fun InsideView(modifier: Modifier = Modifier, collectInside: CollectInside,actio
                     )
                 } else {
                     Row(Modifier.padding(top = 12.dp)) {
-                        Image(
-                            rememberImagePainter(envelopePic, builder = {
-                                error(R.mipmap.ic_default_round)
-                            }),
-                            contentDescription = "", Modifier.size(100.dp),
+                        NetworkImage(
+                            envelopePic,
+                            Modifier.size(100.dp),
                             contentScale = ContentScale.Crop,
+                            defaultImg = R.mipmap.ic_default_round
                         )
                         Column(Modifier.padding(start = 8.dp)) {
                             Text(
