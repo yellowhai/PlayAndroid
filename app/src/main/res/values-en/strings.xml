@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">playAndroid</string>
+
+    <!-- login -->
+    <string name="please_input_username">username</string>
+    <string name="please_input_password">password</string>
+    <string name="please_input_password_confirm">Password confirm</string>
+    <string name="Inconsistent_password">Inconsistent password</string>
+    <string name="account">Account</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Password confirm</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="sign_in">Sign in</string>
+    <string name="show_pwd">Show Password</string>
+    <string name="register_success">Register success</string>
+    <string name="login_success">Login success</string>
+    <string name="istop">Is top</string>
+    <string name="neww">New</string>
+    <string name="project">Project</string>
+    <string name="clear_history">Clear historical search data?</string>
+</resources>

@@ -1,0 +1,92 @@
+ext{
+    isRelease = true
+
+    //android构建配置
+    android_models = [
+            compileSdk : 31,
+            minSdk : 23,
+            targetSdk : 31,
+            versionCode : 1,
+            versionName : "1.0"
+    ]
+    
+    app_id = [
+            mine      : 'com.hh.mine',
+    ]
+
+    core_ktx_version = '1.7.0'
+    appcompat_version = '1.4.0'
+    lifecycle_version = '2.4.0'
+    material_version = '1.4.0'
+    work_version = '2.7.1'
+    gson_version = '2.8.9'
+    litepal_version = '3.2.3'
+    landscapist_version = '1.4.5'
+    retrofit_version = '2.9.0'
+    okhttp_version = '4.9.3'
+    startup_version = '1.1.0'
+    XXPermissions_version = '13.2'
+    datastore_version = '1.0.0'
+    materialDialog_version = '0.6.2'
+    accompanist_version = '0.24.3-alpha'
+
+
+    jetpack_compose = [
+            material : "androidx.compose.material:material:$compose_version",
+            activity : "androidx.activity:activity-compose:$appcompat_version",
+    ]
+
+    commonApi = [
+            ktx_core        : "androidx.core:core-ktx:$core_ktx_version",
+            lifecycle       : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            appcompat       : "androidx.appcompat:appcompat:$appcompat_version",
+            material        : "com.google.android.material:material:$material_version",
+            //数据存储
+            datastore       : "androidx.datastore:datastore-preferences:$datastore_version",
+            //权限处理
+            XXPermissions   : "com.github.getActivity:XXPermissions:$XXPermissions_version",
+    ]
+
+    net = [
+            retrofit    : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            converter   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            okhttp      : "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
+            gson        : "com.google.code.gson:gson:$gson_version"
+    ]
+
+    accompanist_ui = [
+            insets_ui    : "com.google.accompanist:accompanist-insets-ui:$accompanist_version",
+            navigation   : "com.google.accompanist:accompanist-navigation-animation:$accompanist_version",
+            pager        : "com.google.accompanist:accompanist-pager:$accompanist_version",
+            swiperefresh : "com.google.accompanist:accompanist-swiperefresh:$accompanist_version",
+            flowlayout   : "com.google.accompanist:accompanist-flowlayout:$accompanist_version",
+            systemUi     : "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version",
+            webview      : "com.google.accompanist:accompanist-webview:$accompanist_version"
+    ]
+
+    database =[
+            litepal :  "org.litepal.guolindev:core:$litepal_version"
+    ]
+
+    skydoves_coil = [
+            landscapist_coil :  "com.github.skydoves:landscapist-coil:$landscapist_version"
+    ]
+
+    workManager = [
+            // Kotlin + coroutines
+            work = "androidx.work:work-runtime-ktx:$work_version"
+    ]
+
+    material_dialog = [
+            color : "io.github.vanpra.compose-material-dialogs:color:$materialDialog_version",
+            core  : "io.github.vanpra.compose-material-dialogs:core:$materialDialog_version",
+            datetime  : "io.github.vanpra.compose-material-dialogs:datetime:$materialDialog_version"
+    ]
+
+    paging = "androidx.paging:paging-compose:1.0.0-alpha14"
+
+    jetpackComposeLibs = jetpack_compose.values()
+    commonApiLibs = commonApi.values()
+    netLibs = net.values()
+    materialDialogLibs = material_dialog.values()
+}

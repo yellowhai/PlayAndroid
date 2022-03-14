@@ -1,2 +1,2 @@
 # PlayAndroid
-playandroid
+Play Android with jetpack compose
