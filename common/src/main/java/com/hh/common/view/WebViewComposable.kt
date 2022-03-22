@@ -26,6 +26,8 @@ import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 
 /**
  * @Description: todo
@@ -66,7 +68,7 @@ fun HhfWebView(
         TopAppBar(
             {
                 MarqueeText(
-                    title,
+                    title.replace("<em class='highlight'>","").replace("</em>",""),
                     Modifier,
                     color = Color.White,
                     softWrap = false
@@ -97,6 +99,14 @@ fun HhfWebView(
             },
             elevation = 2.dp,
         )
+//        val progress: Int by progressFlow.collectAsState(initial = 0)
+//        LinearProgressIndicator(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(8.dp),
+//            progress = progress / 100f,
+//            backgroundColor = Color(0xff2196F3)
+//        )
         BoxWithConstraints(Modifier.weight(1f)) {
             WebView(
                 state,
@@ -109,6 +119,15 @@ fun HhfWebView(
             if (state.isLoading) {
                 BoxProgress()
             }
+        }
+
+    }
+}
+private val progressFlow by lazy {
+    flow {
+        repeat(100) {
+            emit(it + 1)
+            delay(50)
         }
     }
 }

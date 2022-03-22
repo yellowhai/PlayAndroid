@@ -204,7 +204,7 @@ fun MineTopAvatar(
             NetworkImage(
                 this,
                 contentScale = ContentScale.FillWidth,
-                modifier = modifier.graphicsLayer(
+                modifier = Modifier.graphicsLayer(
                     renderEffect = RenderEffect.createBlurEffect(25f,25f, Shader.TileMode.MIRROR).asComposeRenderEffect()
                 ),
                 defaultImg = R.mipmap.ic_default_round,

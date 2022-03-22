@@ -80,6 +80,7 @@ fun SearchActionButton(
                     block()
                 }
             },
+            backgroundColor = HhfTheme.colors.themeColor
         ) {
             Icon(Icons.Filled.ArrowUpward, contentDescription = "up")
         }

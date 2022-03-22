@@ -123,7 +123,7 @@ fun HomeListItem(modifier: Modifier = Modifier, homeBean: ArticleBean, isShowLab
                         )
                         Column(Modifier.padding(start = 8.dp)) {
                             Text(
-                                title,
+                                title.replace("<em class='highlight'>","").replace("</em>",""),
                                 color = HhfTheme.colors.textColor,
                                 fontSize = 14.sp,
                                 maxLines = 3,

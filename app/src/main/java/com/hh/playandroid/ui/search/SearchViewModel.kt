@@ -48,7 +48,6 @@ class SearchViewModel : BaseViewModel() {
             SearchAction.ClearSearchName -> viewStates = viewStates.copy(shareName = "")
             is SearchAction.ChangeShareName -> viewStates = viewStates.copy(shareName = action.s)
             is SearchAction.RemoveHistory -> removeIt(action.s)
-            is SearchAction.ShareHistory -> search(action.s)
         }
     }
 
@@ -107,12 +106,6 @@ class SearchViewModel : BaseViewModel() {
         }
         searchList = viewStates.historyList.toString()
     }
-
-    private fun search(name : String){
-        CpNavigation.toBundle(ModelPath.SearchResult,Bundle().apply {
-            putString(SEARCH_NAME,name)
-        })
-    }
 }
 
 
@@ -125,7 +118,6 @@ sealed class SearchAction{
     object Share : SearchAction()
     data class RemoveHistory(val s : String) : SearchAction()
     data class ChangeShareName(val s : String) : SearchAction()
-    data class ShareHistory(val s : String) : SearchAction()
 }
 
 data class SearchState(val historyList : ArrayList<String> = arrayListOf(),
