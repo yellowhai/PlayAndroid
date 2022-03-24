@@ -45,3 +45,12 @@ fun Any?.toJson():String{
     return Gson().toJson(this)
 }
 
+fun String.filterHtml() : String{
+    return this.replace("<em class='highlight'>","")
+        .replace("</em>","")
+        .replace("&ldquo;","")
+        .replace("&rdquo;","")
+        .replace("&mdash;","")
+}
+
+

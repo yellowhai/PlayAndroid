@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hh.common.bean.ModelPath
+import com.hh.common.ext.filterHtml
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CpNavigation
 import com.hh.common.view.*
@@ -107,7 +108,7 @@ fun HomeListItem(modifier: Modifier = Modifier, homeBean: ArticleBean, isShowLab
                 }
                 if (TextUtils.isEmpty(envelopePic)) {
                     Text(
-                        title.replace("<em class='highlight'>","").replace("</em>",""),
+                        title.filterHtml(),
                         Modifier.padding(top = 12.dp),
                         HhfTheme.colors.textColor,
                         fontSize = 14.sp,
@@ -123,7 +124,7 @@ fun HomeListItem(modifier: Modifier = Modifier, homeBean: ArticleBean, isShowLab
                         )
                         Column(Modifier.padding(start = 8.dp)) {
                             Text(
-                                title.replace("<em class='highlight'>","").replace("</em>",""),
+                                title.filterHtml(),
                                 color = HhfTheme.colors.textColor,
                                 fontSize = 14.sp,
                                 maxLines = 3,

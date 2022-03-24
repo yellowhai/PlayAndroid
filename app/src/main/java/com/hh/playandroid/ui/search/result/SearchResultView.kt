@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -80,7 +81,8 @@ fun SearchActionButton(
                     block()
                 }
             },
-            backgroundColor = HhfTheme.colors.themeColor
+            backgroundColor = HhfTheme.colors.themeColor,
+            contentColor = Color.White
         ) {
             Icon(Icons.Filled.ArrowUpward, contentDescription = "up")
         }
@@ -102,7 +104,6 @@ fun SearchResultContent(viewModel: SearchResultViewModel, listState: LazyListSta
         }
     }
     else{
-        listState.firstVisibleItemIndex.toString().logE()
         if(listState.firstVisibleItemIndex == 0){
             viewModel.dispatch(SearchResultAction.ChangeShowBtn(false))
         }
@@ -123,7 +124,6 @@ fun SearchResultContent(viewModel: SearchResultViewModel, listState: LazyListSta
                 LazyColumn(state = listState) {
                     items(it) { homeBean ->
                         homeBean?.apply {
-                            this.toString().logE()
                             HomeListItem(homeBean = this) {
                                 if (CacheUtils.isLogin) {
                                     viewModel.dispatch(SearchResultAction.Collect(homeBean, it))

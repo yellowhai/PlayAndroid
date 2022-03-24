@@ -62,7 +62,7 @@ dependencies {
     api fileTree(include: ['*.jar'],dir: 'libs')
     api 'androidx.compose.material:material-icons-core:1.1.0'
     api 'androidx.compose.material:material-icons-extended:1.1.0'
-
+    api project(':renderscript-toolkit')
 
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }

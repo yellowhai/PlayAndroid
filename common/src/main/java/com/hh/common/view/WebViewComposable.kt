@@ -3,6 +3,8 @@ package com.hh.common.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -23,11 +25,12 @@ import com.google.accompanist.web.rememberWebViewState
 import com.google.accompanist.insets.ui.TopAppBar
 import com.hh.common.R
 import com.hh.common.bean.ModelPath
+import com.hh.common.ext.filterHtml
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 /**
  * @Description: todo
@@ -68,7 +71,7 @@ fun HhfWebView(
         TopAppBar(
             {
                 MarqueeText(
-                    title.replace("<em class='highlight'>","").replace("</em>",""),
+                    title.filterHtml(),
                     Modifier,
                     color = Color.White,
                     softWrap = false
@@ -99,36 +102,35 @@ fun HhfWebView(
             },
             elevation = 2.dp,
         )
-//        val progress: Int by progressFlow.collectAsState(initial = 0)
-//        LinearProgressIndicator(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(8.dp),
-//            progress = progress / 100f,
-//            backgroundColor = Color(0xff2196F3)
-//        )
+        var progress by remember{ mutableStateOf(1f)}
+        var complete by remember{ mutableStateOf(false)}
+        val scope = rememberCoroutineScope()
         BoxWithConstraints(Modifier.weight(1f)) {
             WebView(
                 state,
-                Modifier.size(maxWidth, maxHeight),
+                Modifier.size(maxWidth,maxHeight),
                 onCreated = {
                     it.settings.javaScriptEnabled = true
                     it.setBackgroundColor(0)
+                    it.webChromeClient = object : WebChromeClient() {
+                        override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                            progress = newProgress/100.toFloat()
+                            scope.launch {
+                                delay(500L)
+                                if(newProgress == 100){
+                                    complete = true
+                                }
+                            }
+                        }
+                    }
                 }
             )
-            if (state.isLoading) {
-                BoxProgress()
+            if(!complete){
+                LinearProgressIndicator(progress = progress,Modifier.fillMaxWidth(),
+                    HhfTheme.colors.themeColor,HhfTheme.colors.background)
             }
         }
 
-    }
-}
-private val progressFlow by lazy {
-    flow {
-        repeat(100) {
-            emit(it + 1)
-            delay(50)
-        }
     }
 }
 

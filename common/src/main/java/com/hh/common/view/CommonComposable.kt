@@ -1,13 +1,7 @@
 package com.hh.common.view
 
-import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
@@ -16,16 +10,13 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -34,8 +25,6 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.ui.TopAppBar
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
 import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
@@ -50,13 +39,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-import kotlin.math.absoluteValue
 
 /**
  * @ProjectName: playandroid
- * @Package: com.hh.common.view
- * @Description: 类描述
- * @Author: Hai Huang
+ * @Author: yshh
  * @CreateDate: 2021/12/31  13:59
  */
 
@@ -256,60 +242,7 @@ class QureytoImageShapes(var hudu: Float = 100f, var controller: Float = 0f) : S
     }
 }
 
-@ExperimentalPagerApi
-fun Modifier.pagerTabIndicatorOffsetH(
-    pagerState: PagerState,
-    tabPositions: List<TabPosition>,
-    width: Dp = 1.dp
-): Modifier = composed {
-    // If there are no pages, nothing to show
-    if (pagerState.pageCount == 0) return@composed this
 
-    val targetIndicatorOffset: Dp
-
-    val currentTab = tabPositions[pagerState.currentPage]
-    val targetPage = pagerState.targetPage
-    val targetTab = targetPage.let { tabPositions.getOrNull(it) }
-
-    if (targetTab != null) {
-        // The distance between the target and current page. If the pager is animating over many
-        // items this could be > 1
-        val targetDistance = (targetPage - pagerState.currentPage).absoluteValue
-        // Our normalized fraction over the target distance
-        val fraction =
-            (pagerState.currentPageOffset / kotlin.math.max(targetDistance, 1)).absoluteValue
-
-        targetIndicatorOffset =
-            androidx.compose.ui.unit.lerp(currentTab.left, targetTab.left, fraction)
-    } else {
-        // Otherwise we just use the current tab/page
-        targetIndicatorOffset = currentTab.left
-    }
-
-    fillMaxWidth()
-        .wrapContentSize(Alignment.BottomStart)
-        .offset(x = targetIndicatorOffset + ((currentTab.width - width) / 2))
-        .width(width)
-}
-
-fun Modifier.ownTabIndicatorOffset(
-    currentTabPosition: TabPosition,
-    currentTabWidth: Dp = currentTabPosition.width
-): Modifier = composed(
-    inspectorInfo = debugInspectorInfo {
-        name = "tabIndicatorOffset"
-        value = currentTabPosition
-    }
-) {
-    val indicatorOffset by animateDpAsState(
-        targetValue = currentTabPosition.left,
-        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing)
-    )
-    fillMaxWidth()
-        .wrapContentSize(Alignment.BottomStart)
-        .offset(x = indicatorOffset + ((currentTabPosition.width - currentTabWidth) / 2))
-        .width(currentTabWidth)
-}
 
 @Composable
 fun ColumnTopBar(

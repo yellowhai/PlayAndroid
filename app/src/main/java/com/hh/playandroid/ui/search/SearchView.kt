@@ -152,7 +152,7 @@ fun SearchHotItem(viewModel: SearchViewModel) {
                 .background(Color.LightGray.copy(0.6f))
                 .padding(8.dp, 10.dp)
                 .clickable {
-                    viewModel.dispatch(SearchAction.ChangeShareName(list[it].name.replace("\\s".toRegex(), "")))
+                    viewModel.dispatch(SearchAction.ChangeShareName(list[it].name))
                     viewModel.dispatch(SearchAction.Share)
                 },
             contentAlignment = Alignment.Center,
@@ -211,7 +211,7 @@ fun SearchHistory(modifier: Modifier = Modifier, viewModel: SearchViewModel) {
                     Modifier
                         .fillMaxWidth()
                         .clickable {
-                            viewModel.dispatch(SearchAction.ChangeShareName(it.replace("\\s".toRegex(), "")))
+                            viewModel.dispatch(SearchAction.ChangeShareName(it))
                             viewModel.dispatch(SearchAction.Share)
                         }
                         .padding(top = 10.dp, bottom = 10.dp),

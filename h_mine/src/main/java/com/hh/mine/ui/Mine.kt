@@ -185,7 +185,6 @@ fun MineItem(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun MineTopAvatar(
     modifier: Modifier = Modifier,
@@ -204,13 +203,19 @@ fun MineTopAvatar(
             NetworkImage(
                 this,
                 contentScale = ContentScale.FillWidth,
-                modifier = Modifier.graphicsLayer(
-                    renderEffect = RenderEffect.createBlurEffect(25f,25f, Shader.TileMode.MIRROR).asComposeRenderEffect()
-                ),
-                defaultImg = R.mipmap.ic_default_round,
+                modifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    Modifier.graphicsLayer(
+                        renderEffect = RenderEffect.createBlurEffect(
+                            25f,
+                            25f,
+                            Shader.TileMode.MIRROR
+                        )
+                            .asComposeRenderEffect()
+                    )
+                } else Modifier,
+                defaultImg = R.mipmap.ic_default_round
             )
         }
-
         Column {
             NetworkImage(
                 if (avatar.startsWith("http")) viewModel.viewStates.avatarBitmap

@@ -2,11 +2,13 @@ package com.hh.mine.ui
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.google.android.renderscript.Toolkit
 import com.hh.common.api.TaskApi
 import com.hh.common.base.BaseViewModel
 import com.hh.common.bean.Integral
@@ -35,30 +37,31 @@ class MineViewModel : BaseViewModel() {
         when (action) {
             is MineViewEvent.Blur -> bitmapBlur(action.s)
             is MineViewEvent.ToComposable -> toComposable(action.type)
-            is MineViewEvent.ChangePopupState -> viewStates = viewStates.copy(isShowPopup = action.flag)
+            is MineViewEvent.ChangePopupState -> viewStates =
+                viewStates.copy(isShowPopup = action.flag)
             is MineViewEvent.SetUserInfo -> viewStates = viewStates.copy(userInfo = action.userInfo)
             is MineViewEvent.GetIntegral -> getIntegral()
         }
     }
 
-    private fun toComposable(type : Int){
-        when(type){
+    private fun toComposable(type: Int) {
+        when (type) {
             0 -> CpNavigation.to(ModelPath.Integral)
             1 -> CpNavigation.to(ModelPath.Collect)
             2 -> CpNavigation.to(ModelPath.Share)
             3 -> CpNavigation.to(ModelPath.Todo)
-            4 -> CpNavigation.toBundle(ModelPath.WebView,Bundle().apply {
-                putString(webTitle,"PlayAndroid")
-                putString(webUrl,"https://github.com/yellowhai/PlayAndroid")
-                putBoolean(webIsCollect,false)
-                putInt(webCollectId,998)
-                putInt(webCollectType,1)
+            4 -> CpNavigation.toBundle(ModelPath.WebView, Bundle().apply {
+                putString(webTitle, "PlayAndroid")
+                putString(webUrl, "https://github.com/yellowhai/PlayAndroid")
+                putBoolean(webIsCollect, false)
+                putInt(webCollectId, 998)
+                putInt(webCollectType, 1)
             })
             5 -> CpNavigation.to(ModelPath.Setting)
         }
     }
 
-    private fun getIntegral(){
+    private fun getIntegral() {
         viewModelScope.launch {
             flow {
                 emit(
@@ -79,18 +82,28 @@ class MineViewModel : BaseViewModel() {
         }
     }
 
-    private fun bitmapBlur(s : String) {
+    private fun bitmapBlur(s: String) {
         viewModelScope.launch {
-                viewStates = if(s.startsWith("http") || s == ""){
-                    viewStates.copy(avatarBitmap = s,backgroundBitmap = s.toBitmap())
-                } else{
-                    viewStates.copy(avatarBitmap = s,backgroundBitmap = BitmapFactory.decodeFile(s))
-                }
+            viewStates = if (s.startsWith("http") || s == "") {
+                viewStates.copy(
+                    avatarBitmap = s,
+                    backgroundBitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                        Toolkit.blur(s.toBitmap(), 25)
+                    } else s.toBitmap()
+                )
+            } else {
+                viewStates.copy(
+                    avatarBitmap = s,
+                    backgroundBitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                        Toolkit.blur(s.toBitmap(), 25)
+                    } else BitmapFactory.decodeFile(s)
+                )
+            }
         }
     }
 }
 
-sealed class MineViewEvent{
+sealed class MineViewEvent {
     data class Blur(val s: String) : MineViewEvent()
     data class ToComposable(val type: Int) : MineViewEvent()
     data class ChangePopupState(val flag: Boolean) : MineViewEvent()
@@ -98,9 +111,10 @@ sealed class MineViewEvent{
     object GetIntegral : MineViewEvent()
 }
 
-data class MineViewState(val avatarBitmap: String = avatar,
-                         val backgroundBitmap:Bitmap? = null,
-                         val isShowPopup: Boolean = false,
-                         val userInfo : UserInfo? =null,
-                         val integral : Integral? = null
-                         )
+data class MineViewState(
+    val avatarBitmap: String = avatar,
+    val backgroundBitmap: Bitmap? = null,
+    val isShowPopup: Boolean = false,
+    val userInfo: UserInfo? = null,
+    val integral: Integral? = null
+)

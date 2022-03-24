@@ -7,9 +7,15 @@ dependencyResolutionManagement {
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
     }
 }
 rootProject.name = "PlayAndroid"
 include ':app'
 include ':common'
 include ':h_mine'
+include ':renderscript-toolkit'

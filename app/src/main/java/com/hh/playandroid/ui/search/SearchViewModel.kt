@@ -13,6 +13,7 @@ import com.hh.common.base.BaseViewModel
 import com.hh.common.base.YshhApplication.Companion.context
 import com.hh.common.base.launch
 import com.hh.common.bean.ModelPath
+import com.hh.common.ext.toJson
 import com.hh.common.theme.CommonPurple200
 import com.hh.common.theme.CommonPurple500
 import com.hh.common.theme.CommonPurple700
@@ -104,7 +105,7 @@ class SearchViewModel : BaseViewModel() {
             it.add(0, viewStates.shareName)
             it
         }
-        searchList = viewStates.historyList.toString()
+        searchList = viewStates.historyList.toJson()
     }
 }
 
