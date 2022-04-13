@@ -30,6 +30,7 @@ import com.hh.common.util.logE
 import com.hh.common.view.ColumnTopBar
 import com.hh.common.view.PagingItem
 import com.hh.playandroid.ui.home.HomeListItem
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -94,13 +95,18 @@ fun SearchResultContent(viewModel: SearchResultViewModel, listState: LazyListSta
     val list = viewModel.viewStates.searchList?.collectAsLazyPagingItems()
     if (listState.isScrollInProgress) {
         val preItemIndex by remember { mutableStateOf(listState.firstVisibleItemIndex) }
-        when {
-            listState.firstVisibleItemIndex > preItemIndex -> viewModel.dispatch(
-                SearchResultAction.ChangeShowBtn(false)
-            )
-            listState.firstVisibleItemIndex < preItemIndex -> viewModel.dispatch(
-                SearchResultAction.ChangeShowBtn(true)
-            )
+        LaunchedEffect(Unit) {
+            snapshotFlow { listState.firstVisibleItemIndex }
+                .collect {
+                    when {
+                        it > preItemIndex -> viewModel.dispatch(
+                            SearchResultAction.ChangeShowBtn(false)
+                        )
+                        it < preItemIndex -> viewModel.dispatch(
+                            SearchResultAction.ChangeShowBtn(true)
+                        )
+                    }
+                }
         }
     }
     else{

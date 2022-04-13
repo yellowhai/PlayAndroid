@@ -97,20 +97,20 @@ fun MainContent(modifier: Modifier = Modifier) {
                             .align(Alignment.CenterHorizontally)
                     )
                     3 -> {
-                        if (isLogin) {
+//                        if (isLogin) {
                             Mine(
                                 Modifier
                                     .fillMaxSize()
                                     .background(HhfTheme.colors.background)
                                     .align(Alignment.CenterHorizontally)
                             )
-                        } else {
-                            ErrorBox(
-                                Modifier.fillMaxSize(),
-                                title = stringResource(id = R.string.sign_in)
-                            )
-                            { CpNavigation.to(ModelPath.Login) }
-                        }
+//                        } else {
+//                            ErrorBox(
+//                                Modifier.fillMaxSize(),
+//                                title = stringResource(id = R.string.sign_in)
+//                            )
+//                            { CpNavigation.to(ModelPath.Login) }
+//                        }
                     }
                 }
             }

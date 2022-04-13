@@ -8,7 +8,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -39,10 +38,12 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.gson.Gson
 import com.hh.common.bean.MineItemBean
+import com.hh.common.bean.ModelPath
 import com.hh.common.bean.UserInfo
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.*
 import com.hh.common.util.CacheUtils.avatar
+import com.hh.common.util.CacheUtils.isLogin
 import com.hh.common.view.NetworkImage
 import com.hh.common.view.QureytoImageShapes
 import com.hh.mine.R
@@ -62,7 +63,6 @@ import java.io.File
  * @Author: Hai Huang
  * @CreateDate: 2021/8/27  9:40
  */
-@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun Mine(modifier: Modifier = Modifier, list: List<MineItemBean> = mineList) {
     val context = LocalContext.current
@@ -100,7 +100,12 @@ fun Mine(modifier: Modifier = Modifier, list: List<MineItemBean> = mineList) {
                         all: Boolean
                     ) {
                         if (all) {
-                            mineViewModel.dispatch(MineViewEvent.ChangePopupState(true))
+                            if(isLogin){
+                                mineViewModel.dispatch(MineViewEvent.ChangePopupState(true))
+                            }
+                            else{
+                                CpNavigation.to(ModelPath.Login)
+                            }
                         }
                     }
 

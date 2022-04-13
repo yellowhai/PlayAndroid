@@ -11,10 +11,7 @@ import androidx.navigation.*
 import com.hh.common.bean.ModelPath
 
 /**
- * @ProjectName: CBook
- * @Package: com.hh.cbook.util
- * @Description: 类描述
- * @Author: Hai Huang
+ * @Author:yshh
  * @CreateDate: 2021/8/27  10:06
  */
 object CpNavigation {
@@ -62,9 +59,9 @@ object CpNavigation {
         }
     }
 
-    //    /**
-//     * 返回到上一页
-//     */
+    /**
+     * 返回到上一页
+     */
     fun backAndReturnsIsLastPage(): Boolean {
         return if (navList.size == 1) {
             //当前是最后一页了，返回true

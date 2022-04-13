@@ -16,6 +16,7 @@ import com.hh.common.bean.ModelPath
 import com.hh.common.bean.UserInfo
 import com.hh.common.ext.toBitmap
 import com.hh.common.util.CacheUtils.avatar
+import com.hh.common.util.CacheUtils.isLogin
 import com.hh.common.util.CpNavigation
 import com.hh.common.util.logE
 import com.hh.common.view.*
@@ -45,19 +46,34 @@ class MineViewModel : BaseViewModel() {
     }
 
     private fun toComposable(type: Int) {
-        when (type) {
-            0 -> CpNavigation.to(ModelPath.Integral)
-            1 -> CpNavigation.to(ModelPath.Collect)
-            2 -> CpNavigation.to(ModelPath.Share)
-            3 -> CpNavigation.to(ModelPath.Todo)
-            4 -> CpNavigation.toBundle(ModelPath.WebView, Bundle().apply {
-                putString(webTitle, "PlayAndroid")
-                putString(webUrl, "https://github.com/yellowhai/PlayAndroid")
-                putBoolean(webIsCollect, false)
-                putInt(webCollectId, 998)
-                putInt(webCollectType, 1)
-            })
-            5 -> CpNavigation.to(ModelPath.Setting)
+        if(isLogin){
+            when (type) {
+                0 -> CpNavigation.to(ModelPath.Integral)
+                1 -> CpNavigation.to(ModelPath.Collect)
+                2 -> CpNavigation.to(ModelPath.Share)
+                3 -> CpNavigation.to(ModelPath.Todo)
+                4 -> CpNavigation.toBundle(ModelPath.WebView, Bundle().apply {
+                    putString(webTitle, "PlayAndroid")
+                    putString(webUrl, "https://github.com/yellowhai/PlayAndroid")
+                    putBoolean(webIsCollect, false)
+                    putInt(webCollectId, 998)
+                    putInt(webCollectType, 1)
+                })
+                5 -> CpNavigation.to(ModelPath.Setting)
+            }
+        }
+        else{
+            when (type) {
+                4 -> CpNavigation.toBundle(ModelPath.WebView, Bundle().apply {
+                    putString(webTitle, "PlayAndroid")
+                    putString(webUrl, "https://github.com/yellowhai/PlayAndroid")
+                    putBoolean(webIsCollect, false)
+                    putInt(webCollectId, 998)
+                    putInt(webCollectType, 1)
+                })
+                5 -> CpNavigation.to(ModelPath.Setting)
+                else -> CpNavigation.to(ModelPath.Login)
+            }
         }
     }
 

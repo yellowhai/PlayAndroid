@@ -2,6 +2,7 @@ package com.hh.playandroid.ui.home
 
 import android.os.Bundle
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -83,13 +84,16 @@ fun BannerPager(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
 @Composable
 fun BannerIndicator(modifier: Modifier = Modifier,viewModel: HomeViewModel,pagerState : PagerState) {
     "BannerIndicator".logE()
-    LaunchedEffect(viewModel){
-        while (true) {
-            delay(3000L)
-            if (pagerState.currentPage < viewModel.viewStates.bannerList.size -1) {
-                pagerState.animateScrollToPage(pagerState.currentPage + 1)
-            } else {
-                pagerState.scrollToPage(0)
+    val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+    if (!isDragged) {
+        LaunchedEffect(viewModel){
+            while (true) {
+                delay(3000L)
+                if (pagerState.currentPage < viewModel.viewStates.bannerList.size -1) {
+                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                } else {
+                    pagerState.scrollToPage(0)
+                }
             }
         }
     }

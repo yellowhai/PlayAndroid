@@ -18,4 +18,4 @@ rootProject.name = "PlayAndroid"
 include ':app'
 include ':common'
 include ':h_mine'
-include ':renderscript-toolkit'
+include ':toolkit'
