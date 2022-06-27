@@ -214,11 +214,9 @@ fun MineTopAvatar(
                             25f,
                             25f,
                             Shader.TileMode.MIRROR
-                        )
-                            .asComposeRenderEffect()
+                        ).asComposeRenderEffect()
                     )
-                } else Modifier,
-                defaultImg = R.mipmap.ic_default_round
+                } else Modifier
             )
         }
         Column {
@@ -235,7 +233,7 @@ fun MineTopAvatar(
                     .clickable {
                         imgClick.invoke()
                     },
-                defaultImg = R.mipmap.ic_default_round
+                defaultImg = R.drawable.ic_default_foreground
             )
             PicPopup(viewModel.viewStates.isShowPopup, Modifier) { path, isShow ->
                 path?.apply {

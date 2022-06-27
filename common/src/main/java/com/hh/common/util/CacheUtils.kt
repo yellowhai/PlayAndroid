@@ -46,7 +46,7 @@ object CacheUtils {
 
     var themeColor: Int by safeKeyDelegate(intPreferencesKey("color"), Color.parseColor("#004D40"))
 
-    var avatar: String by safeKeyDelegate(stringPreferencesKey("avatar"), "https://img1.baidu.com/it/u=3023887564,2192300864&fm=26&fmt=auto")
+    var avatar: String by safeKeyDelegate(stringPreferencesKey("avatar"), "")
 
     var isLogin: Boolean by safeKeyDelegate(booleanPreferencesKey("isLogin"),false)
 

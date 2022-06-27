@@ -25,6 +25,7 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.ui.TopAppBar
+import com.hh.common.R
 import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
@@ -175,6 +176,7 @@ fun NetworkImage(
     contentScale: ContentScale = ContentScale.Crop,
     bitmapPalette: BitmapPalette? = null,
     highlightColor: Color = HhfTheme.colors.themeColor,
+    colorFilter : ColorFilter? = ColorFilter.tint(HhfTheme.colors.themeColor),
     @DrawableRes defaultImg: Int? = null
 ) {
     CoilImage(
@@ -195,7 +197,7 @@ fun NetworkImage(
                     contentDescription = "movie Image",
                     contentScale = ContentScale.FillBounds,
                     modifier = modifier.fillMaxSize(),
-                    colorFilter = ColorFilter.tint(HhfTheme.colors.themeColor)
+                    colorFilter = colorFilter
                 )
             }
         }

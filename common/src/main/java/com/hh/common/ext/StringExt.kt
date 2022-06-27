@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 suspend fun String.toBitmap(): Bitmap = // Disable hardware bitmaps.
     withContext(IO) {
         var bitmap: Bitmap =
-            context.resources.getDrawable(R.mipmap.ic_default_round, null).toBitmap()
+            context.resources.getDrawable(R.drawable.ic_default_round, null).toBitmap()
         kotlin.runCatching {
             val loader = ImageLoader(context)
             val request = ImageRequest.Builder(context)
