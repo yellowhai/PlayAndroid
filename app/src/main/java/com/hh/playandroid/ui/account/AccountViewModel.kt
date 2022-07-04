@@ -11,7 +11,6 @@ import com.hh.common.api.CommonApiService
 import com.hh.common.api.TaskApi
 import com.hh.common.base.BaseViewModel
 import com.hh.common.base.launch
-import com.hh.common.util.logE
 import com.hh.mine.ui.integral.PAGE_SIZE
 import com.hh.playandroid.api.ApiServices
 import com.hh.playandroid.bean.Tabs
@@ -56,7 +55,6 @@ class AccountViewModel : BaseViewModel() {
                 forEachIndexed { index, accountTab ->
                     accountTab.pageId = index
                 }
-                this.toString().logE()
                 viewStates = viewStates.copy(tabList = this)
             } ?: run {
                 viewStates = viewStates.copy(isShowError = true)

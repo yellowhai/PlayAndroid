@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.hh.common.api.TaskApi
 import com.hh.common.bean.IntegralHistory
-import com.hh.common.util.logE
 import com.hh.mine.api.ApiService
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext

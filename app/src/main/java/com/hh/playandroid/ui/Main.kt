@@ -11,8 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.insets.navigationBarsPadding
@@ -21,12 +19,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.hh.common.base.YshhApplication
-import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
-import com.hh.common.util.CacheUtils.isLogin
-import com.hh.common.util.CpNavigation
-import com.hh.common.util.stringResource
-import com.hh.common.view.ErrorBox
+import com.hh.common.ext.stringResource
 import com.hh.playandroid.util.reenableScrolling
 import com.hh.mine.ui.Mine
 import com.hh.playandroid.R
@@ -35,7 +29,6 @@ import com.hh.playandroid.bean.DashboardState
 import com.hh.playandroid.ui.account.AccountView
 import com.hh.playandroid.ui.home.HomeView
 import com.hh.playandroid.ui.project.ProjectView
-import com.hh.playandroid.ui.square.SquareView
 
 /**
  * @Description: todo

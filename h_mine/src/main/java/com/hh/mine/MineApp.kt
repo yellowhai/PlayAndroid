@@ -1,7 +1,5 @@
 package com.hh.mine
 
-import android.annotation.SuppressLint
-import android.content.Context
 import com.hh.common.base.YshhApplication
 
 /**

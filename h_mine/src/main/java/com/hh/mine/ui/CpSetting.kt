@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hh.common.api.HttpUrl.Base_Url
 import com.hh.common.bean.ModelPath
+import com.hh.common.ext.showToast
 import com.hh.common.theme.ACCENT_COLORS
 import com.hh.common.theme.HhfTheme
 import com.hh.common.theme.PRIMARY_COLORS_SUB
@@ -49,7 +50,6 @@ import kotlinx.coroutines.withContext
 @SuppressLint("CheckResult")
 @Composable
 fun CpSetting(modifier: Modifier = Modifier) {
-    "CpSetting".logE()
     ColumnTopBar(
         modifier
             .fillMaxSize()

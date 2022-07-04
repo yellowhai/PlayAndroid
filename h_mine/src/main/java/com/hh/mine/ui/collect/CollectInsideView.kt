@@ -2,7 +2,6 @@ package com.hh.mine.ui.collect
 
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card

@@ -29,11 +29,15 @@ import java.util.*
 const val timeType = "yyyy-MM-dd HH:mm"
 
 @SuppressLint("SimpleDateFormat")
-fun formatDate(formatStyle: String = timeType, time: Long = System.currentTimeMillis()): String {
+fun formatDate(formatStyle: String = timeType, time: Long = System.currentTimeMillis(),isHour:Boolean = true): String {
     return if (VERSION.SDK_INT >= O) {
         val df: DateTimeFormatter = DateTimeFormatter.ofPattern(formatStyle)
-        val now = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault())
-            .toLocalDate()
+        val now = if(isHour){
+            LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()).toLocalTime()
+        }
+        else{
+            LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault())
+        }
         df.format(now)
     } else {
         val sdf = SimpleDateFormat(formatStyle)
@@ -81,6 +85,7 @@ private const val DAY_MILLIS = 24 * HOUR_MILLIS
  * @param time
  * @return
  */
+@SuppressLint("SimpleDateFormat")
 fun getTimeAgo(time: Long): String {
     var mutableTime = time
     if (time < 1000000000000L) {

@@ -31,7 +31,6 @@ import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.ui.TopAppBar
 import com.hh.common.theme.*
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.playandroid.R
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.message
@@ -117,7 +116,6 @@ private fun SearchTopBar(modifier: Modifier = Modifier, viewModel: SearchViewMod
 
 @Composable
 fun SearchHot(modifier: Modifier = Modifier,viewModel: SearchViewModel) {
-    "SearchHot".logE()
     LaunchedEffect(viewModel){
         viewModel.dispatch(SearchAction.GetHotList)
     }
@@ -134,7 +132,6 @@ fun SearchHot(modifier: Modifier = Modifier,viewModel: SearchViewModel) {
                 Modifier
                     .fillMaxWidth()
                     .padding(12.dp)) {
-                "FlowRow".logE()
                 SearchHotItem(viewModel)
             }
         }
@@ -143,7 +140,6 @@ fun SearchHot(modifier: Modifier = Modifier,viewModel: SearchViewModel) {
 
 @Composable
 fun SearchHotItem(viewModel: SearchViewModel) {
-    "SearchHotItem".logE()
     val list = remember{ viewModel.viewStates.hotList }
     repeat(list.size) {
         Box(

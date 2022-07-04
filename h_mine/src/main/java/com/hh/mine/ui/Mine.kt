@@ -40,6 +40,9 @@ import com.google.gson.Gson
 import com.hh.common.bean.MineItemBean
 import com.hh.common.bean.ModelPath
 import com.hh.common.bean.UserInfo
+import com.hh.common.ext.getStorageEmulated0Dirs
+import com.hh.common.ext.showToast
+import com.hh.common.ext.stringResource
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.*
 import com.hh.common.util.CacheUtils.avatar
@@ -277,7 +280,6 @@ fun PicPopup(
     modifier: Modifier = Modifier,
     photoOrShow: (path: String?, isShow: Boolean) -> Unit = { _, _ -> }
 ) {
-    "PicPopup $isShowPopup".logE()
     val context = LocalContext.current
     val coroutineStore = rememberCoroutineScope()
     var f: File? = null
@@ -327,7 +329,7 @@ fun PicPopup(
         DropdownMenuItem(onClick = {
             // 从相机中获得照片
             val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            val imageFileName = String.format("JPEG_%s.jpg", formatDate("yyyyMMdd_HH-mm-ss"))
+            val imageFileName = String.format("JPEG_%s.jpg", formatDate("yyyyMMdd_HH-mm-ss", isHour = false))
             f = File(
                 context.getExternalFilesDir("${Environment.DIRECTORY_PICTURES}/photo"),
                 imageFileName

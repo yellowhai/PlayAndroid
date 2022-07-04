@@ -1,13 +1,10 @@
-package com.hh.common.util
+package com.hh.common.ext
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.hh.common.R
 import com.hh.common.base.YshhApplication
-import com.vanpra.composematerialdialogs.MaterialDialog
 
 /**
  * @ProjectName: playandroid

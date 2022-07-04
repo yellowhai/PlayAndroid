@@ -1,7 +1,5 @@
 package com.hh.common.bean
 
-import android.os.Parcelable
-
 
 /**
  * wanAndroid api

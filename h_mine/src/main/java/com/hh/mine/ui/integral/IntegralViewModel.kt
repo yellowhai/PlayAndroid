@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.gson.Gson
 import com.hh.common.base.BaseViewModel
 import com.hh.common.bean.IntegralHistory
@@ -15,8 +14,6 @@ import com.hh.common.bean.UserInfo
 import com.hh.common.util.CacheUtils
 import com.hh.mine.ui.integral.paging.IntegralSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 /**

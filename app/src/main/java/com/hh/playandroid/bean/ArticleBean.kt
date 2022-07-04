@@ -7,10 +7,10 @@ package com.hh.playandroid.bean
  */
 data class ArticleBean (
     var apkLink: String,
-    var author: String,//作者
+    var author: String,
     var chapterId: Int,
     var chapterName: String,
-    var collect: Boolean,//是否收藏
+    var collect: Boolean,
     var courseId: Int,
     var desc: String,
     var envelopePic: String,

@@ -14,6 +14,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.hh.common.base.YshhApplication
 import com.hh.common.bean.MineItemBean
 import com.hh.common.bean.ModelPath
+import com.hh.common.ext.stringResource
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.*
 import com.hh.mine.ui.*

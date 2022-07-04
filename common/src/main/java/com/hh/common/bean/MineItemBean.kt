@@ -1,7 +1,6 @@
 package com.hh.common.bean
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import java.io.Serializable
 
 /**
  * @ProjectName: playandroid

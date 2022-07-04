@@ -20,7 +20,7 @@ import com.hh.common.theme.CommonPurple700
 import com.hh.common.theme.CommonTeal200
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.showToast
+import com.hh.common.ext.showToast
 import com.hh.playandroid.R
 import com.hh.playandroid.api.ApiServices
 import com.hh.playandroid.bean.SearchResponse

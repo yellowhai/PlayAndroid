@@ -9,7 +9,7 @@ import com.hh.common.base.YshhApplication.Companion.context
 import com.hh.common.base.launch
 import com.hh.common.util.CpNavigation
 import com.hh.common.util.formatDate
-import com.hh.common.util.showToast
+import com.hh.common.ext.showToast
 import com.hh.mine.R
 import com.hh.mine.api.ApiService
 
@@ -101,7 +101,7 @@ data class TodoAddState(
     val title: String = "",
     val detail: String = "",
     val level: Int = 1,
-    val time: String = formatDate("yyyy-MM-dd"),
+    val time: String = formatDate("yyyy-MM-dd", isHour = false),
     val isChange: Boolean = false,
     val changeId: Int = 0
 )

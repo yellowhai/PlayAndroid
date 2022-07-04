@@ -10,7 +10,6 @@ import com.hh.common.network.AppException
 import com.hh.common.network.ExceptionHandle
 import com.hh.common.util.logE
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -53,7 +52,7 @@ inline fun <reified T> request(
     netState: MutableStateFlow<Resource<T>>
 ) = flow {
     emit(block().apply {
-        if(isSucces()){
+        if(isSuccess()){
             getResponseData()?.apply {
                 netState.value = Resource.Success(this)
             }?:run {

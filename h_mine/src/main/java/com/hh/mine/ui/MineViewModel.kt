@@ -18,7 +18,6 @@ import com.hh.common.ext.toBitmap
 import com.hh.common.util.CacheUtils.avatar
 import com.hh.common.util.CacheUtils.isLogin
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.common.view.*
 import com.hh.mine.api.ApiService
 import kotlinx.coroutines.flow.*
@@ -111,7 +110,7 @@ class MineViewModel : BaseViewModel() {
                 viewStates.copy(
                     avatarBitmap = s,
                     backgroundBitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-                        Toolkit.blur(s.toBitmap(), 25)
+                        Toolkit.blur(BitmapFactory.decodeFile(s), 25)
                     } else BitmapFactory.decodeFile(s)
                 )
             }

@@ -28,7 +28,6 @@ import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.common.view.*
 import com.hh.playandroid.bean.BannerResponse
 import kotlinx.coroutines.delay
@@ -40,7 +39,6 @@ import kotlinx.coroutines.delay
  */
 @Composable
 fun HomeView(modifier: Modifier = Modifier) {
-    "HomeView".logE()
     val viewModel: HomeViewModel = viewModel()
     ColumnTopBarMain(modifier
         .background(HhfTheme.colors.background),
@@ -52,7 +50,6 @@ fun HomeView(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BannerPager(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
-    "BannerPager".logE()
     val pagerState = rememberPagerState()
     LaunchedEffect(viewModel){
         viewModel.dispatch(HomeAction.GetBanner)
@@ -83,7 +80,6 @@ fun BannerPager(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BannerIndicator(modifier: Modifier = Modifier,viewModel: HomeViewModel,pagerState : PagerState) {
-    "BannerIndicator".logE()
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
     if (!isDragged) {
         LaunchedEffect(viewModel){
@@ -154,7 +150,6 @@ fun BannerItem(modifier: Modifier = Modifier, data: BannerResponse) {
 @Composable
 fun HomeContent(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
     val list = viewModel.viewStates.homeList.collectAsLazyPagingItems()
-    "HomeContent".logE()
     SwipeRefresh(
         state = rememberSwipeRefreshState(viewModel.viewStates.isRefresh),
         onRefresh = {

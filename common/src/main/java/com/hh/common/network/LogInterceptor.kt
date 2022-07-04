@@ -31,8 +31,7 @@ import java.io.IOException
 import java.lang.NullPointerException
 import java.lang.StringBuilder
 
-class LogInterceptor @JvmOverloads constructor(logger: HttpLoggingInterceptor.Logger = DEFAULT) : Interceptor {
-    private val logger: HttpLoggingInterceptor.Logger = logger
+class LogInterceptor @JvmOverloads constructor(private val logger: HttpLoggingInterceptor.Logger = DEFAULT) : Interceptor {
 
     @Volatile
     private var level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE

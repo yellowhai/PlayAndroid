@@ -26,7 +26,6 @@ import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.common.view.ColumnTopBar
 import com.hh.common.view.PagingItem
 import com.hh.playandroid.ui.home.HomeListItem
@@ -40,7 +39,6 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun SearchResultView(modifier: Modifier = Modifier, title: String) {
-    "SearchResultView".logE()
     val viewModel: SearchResultViewModel = viewModel()
     LaunchedEffect(viewModel) {
         viewModel.dispatch(SearchResultAction.GetSearchList(title))
@@ -70,7 +68,6 @@ fun SearchActionButton(
     viewModel: SearchResultViewModel,
     block: suspend () -> Unit
 ) {
-    "SearchActionButton".logE()
     val scope = rememberCoroutineScope()
     AnimatedVisibility(
         visible = viewModel.viewStates.isShowBtn,

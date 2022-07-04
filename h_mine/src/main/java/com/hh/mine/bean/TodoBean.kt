@@ -1,6 +1,5 @@
 package com.hh.mine.bean
 
-import android.os.Parcelable
 import java.io.Serializable
 
 /**

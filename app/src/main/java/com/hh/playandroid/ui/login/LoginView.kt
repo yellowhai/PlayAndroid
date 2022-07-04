@@ -27,8 +27,7 @@ import com.hh.common.base.YshhApplication.Companion.context
 import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
-import com.hh.common.util.showToast
+import com.hh.common.ext.showToast
 import com.hh.common.view.CpTopBar
 import com.hh.playandroid.R
 import kotlinx.coroutines.flow.collect

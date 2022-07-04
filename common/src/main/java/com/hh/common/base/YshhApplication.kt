@@ -71,7 +71,7 @@ open class YshhApplication : Application() {
         //        builder.addInterceptor(addQueryParameterInterceptor);
         builder.addInterceptor(headerInterceptor)
         builder.cache(cache)
-        builder.addNetworkInterceptor(logInterceptor);
+        builder.addNetworkInterceptor(logInterceptor)
         builder.cookieJar(cookieJar)
         builder.readTimeout(60000, TimeUnit.MILLISECONDS)
         //全局的写入超时时间60s

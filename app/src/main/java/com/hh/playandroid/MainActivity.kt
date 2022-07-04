@@ -15,6 +15,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.hh.common.base.BaseActivity
+import com.hh.common.ext.showToast
+import com.hh.common.ext.stringResource
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.*
 import com.hh.common.view.DialogProgress
@@ -32,12 +34,10 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         setContent {
-            "setContent".logE()
             HhfTheme(
                 theme = if (isSystemInDarkTheme() || isNight) HhfTheme.Theme.Dark else HhfTheme.Theme.Light,
                 colorTheme = appTheme
             ) {
-                "HhfTheme".logE()
                 val viewModel : MainViewModel = viewModel()
                 if (viewModel.isSplash) {
                     SplashView { viewModel.isSplash = false }

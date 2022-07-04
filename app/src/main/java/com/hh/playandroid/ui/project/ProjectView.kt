@@ -30,7 +30,6 @@ import com.hh.common.ext.pagerTabIndicatorOffsetH
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.common.view.*
 import com.hh.playandroid.R
 import com.hh.playandroid.ui.home.HomeListItem
@@ -62,7 +61,6 @@ fun ProjectView(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProjectTabLayout(viewModel: ProjectViewModel, pagerState: PagerState) {
-    "ProjectTabLayout".logE()
     LaunchedEffect(viewModel) {
         viewModel.dispatch(ProjectAction.GetTabList)
     }
@@ -105,7 +103,6 @@ fun ProjectTabLayout(viewModel: ProjectViewModel, pagerState: PagerState) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProjectTabs(viewModel: ProjectViewModel, pagerState: PagerState) {
-    "ProjectTabs".logE()
     val coroutineScope = rememberCoroutineScope()
     val interactionSource = remember{MutableInteractionSource()}
     viewModel.viewStates.tabList.forEachIndexed { index, ProjectTab ->
@@ -128,7 +125,6 @@ fun ProjectTabs(viewModel: ProjectViewModel, pagerState: PagerState) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProjectContent(viewModel: ProjectViewModel, pagerState: PagerState) {
-    "ProjectContent".logE()
     if (viewModel.viewStates.tabList.isNotEmpty()) {
         HorizontalPager(count = viewModel.viewStates.tabList.size, state = pagerState) { page ->
             when (page) {
@@ -142,7 +138,6 @@ fun ProjectContent(viewModel: ProjectViewModel, pagerState: PagerState) {
 
 @Composable
 fun ProjectList(viewModel: ProjectViewModel, page: Int) {
-    "ProjectList".logE()
     val list = viewModel.getList(page).collectAsLazyPagingItems()
     SwipeRefresh(state = rememberSwipeRefreshState(viewModel.viewStates.isRefresh), onRefresh = {
         list.refresh()

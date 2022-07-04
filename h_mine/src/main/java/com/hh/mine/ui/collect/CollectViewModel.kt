@@ -15,14 +15,13 @@ import com.hh.common.base.YshhApplication.Companion.context
 import com.hh.common.base.launch
 import com.hh.common.network.ExceptionHandle
 import com.hh.common.network.Resource
-import com.hh.common.util.showToast
+import com.hh.common.ext.showToast
 import com.hh.mine.R
 import com.hh.mine.api.ApiService
 import com.hh.mine.bean.CollectInside
 import com.hh.mine.bean.CollectUrl
 import com.hh.mine.ui.collect.paging.CollectSource
 import com.hh.mine.ui.integral.PAGE_SIZE
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

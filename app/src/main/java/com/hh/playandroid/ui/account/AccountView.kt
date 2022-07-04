@@ -27,7 +27,6 @@ import com.hh.common.ext.ownTabIndicatorOffset
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
-import com.hh.common.util.logE
 import com.hh.common.view.*
 import com.hh.playandroid.R
 import com.hh.playandroid.ui.home.HomeListItem
@@ -42,7 +41,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AccountView(modifier: Modifier = Modifier) {
-    "AccountView".logE()
     val viewModel: AccountViewModel = viewModel()
     ColumnTopBarMain(
         modifier.background(HhfTheme.colors.background),
@@ -57,7 +55,6 @@ fun AccountView(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AccountTabLayout(viewModel: AccountViewModel, pagerState: PagerState) {
-    "AccountTabLayout".logE()
     LaunchedEffect(viewModel) {
         viewModel.dispatch(AccountAction.GetTabList)
     }
@@ -93,7 +90,6 @@ fun AccountTabLayout(viewModel: AccountViewModel, pagerState: PagerState) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AccountContent(viewModel: AccountViewModel, pagerState: PagerState) {
-    "AccountContent".logE()
     if (viewModel.viewStates.tabList.isNotEmpty()) {
         HorizontalPager(count = viewModel.viewStates.tabList.size, state = pagerState) { page ->
             when (page) {
@@ -108,7 +104,6 @@ fun AccountContent(viewModel: AccountViewModel, pagerState: PagerState) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun AccountTabs(viewModel: AccountViewModel, pagerState: PagerState) {
-    "AccountTabs".logE()
     val coroutineScope = rememberCoroutineScope()
     viewModel.viewStates.tabList.forEachIndexed { index, accountTab ->
         Tab(
@@ -135,7 +130,6 @@ fun AccountTabs(viewModel: AccountViewModel, pagerState: PagerState) {
 
 @Composable
 fun AccountList(viewModel: AccountViewModel, page: Int) {
-    "AccountList".logE()
     val list = viewModel.getList(page).collectAsLazyPagingItems()
     SwipeRefresh(state = rememberSwipeRefreshState(viewModel.viewStates.isRefresh), onRefresh = {
         list.refresh()

@@ -5,7 +5,7 @@ import android.util.MalformedJsonException
 import coil.network.HttpException
 import com.hh.common.R
 import com.hh.common.base.YshhApplication.Companion.context
-import com.hh.common.util.stringResource
+import com.hh.common.ext.stringResource
 import org.json.JSONException
 import java.net.ConnectException
 
