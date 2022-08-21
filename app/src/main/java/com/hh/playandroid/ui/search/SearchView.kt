@@ -26,11 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.google.accompanist.insets.ui.TopAppBar
 import com.hh.common.theme.*
 import com.hh.common.util.CpNavigation
+import com.hh.common.view.HhTopAppBar
 import com.hh.playandroid.R
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.message
@@ -54,8 +52,8 @@ fun SearchView(modifier: Modifier = Modifier) {
 
 @Composable
 private fun SearchTopBar(modifier: Modifier = Modifier, viewModel: SearchViewModel) {
-    val paddingValues = rememberInsetsPaddingValues(LocalWindowInsets.current.statusBars)
-    TopAppBar(
+    val paddingValues = WindowInsets.statusBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top).asPaddingValues()
+    HhTopAppBar(
         {
             TextField(
                 value = viewModel.viewStates.shareName, onValueChange = {
@@ -74,7 +72,8 @@ private fun SearchTopBar(modifier: Modifier = Modifier, viewModel: SearchViewMod
                     cursorColor = Color.Red
                 ), modifier = modifier
                     .wrapContentHeight(Alignment.CenterVertically)
-                    .height(IntrinsicSize.Min),
+                    .height(IntrinsicSize.Min)
+                ,
                 trailingIcon = {
                     if (viewModel.viewStates.shareName.isNotEmpty()) {
                         IconButton(onClick = { viewModel.dispatch(SearchAction.ClearSearchName) }) {
@@ -93,8 +92,8 @@ private fun SearchTopBar(modifier: Modifier = Modifier, viewModel: SearchViewMod
                 singleLine = true
             )
         },
-        backgroundColor = HhfTheme.colors.themeColor,
         contentPadding = paddingValues,
+        backgroundColor = HhfTheme.colors.themeColor,
         navigationIcon = {
             IconButton(onClick = { CpNavigation.backAndReturnsIsLastPage() }) {
                 Icon(Icons.Filled.ArrowBack, contentDescription = "back", tint = Color.White)

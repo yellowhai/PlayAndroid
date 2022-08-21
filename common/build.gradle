@@ -48,7 +48,7 @@ dependencies {
     api rootProject.ext.jetpackComposeLibs
     api rootProject.ext.materialDialogLibs
     api rootProject.ext.commonApiLibs
-    api rootProject.ext.accompanist_ui.insets_ui
+//    api rootProject.ext.accompanist_ui.insets_ui
     api rootProject.ext.skydoves_coil.landscapist_coil
     api rootProject.ext.accompanist_ui.navigation
     api rootProject.ext.accompanist_ui.systemUi

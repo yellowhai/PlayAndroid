@@ -1,5 +1,6 @@
 package com.hh.playandroid.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +14,6 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -35,6 +35,7 @@ import com.hh.playandroid.ui.project.ProjectView
  * @Author: yshh
  * @CreateDate: 2022/2/22  10:35
  */
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MainContent(modifier: Modifier = Modifier) {
@@ -64,7 +65,7 @@ fun MainContent(modifier: Modifier = Modifier) {
         Column(
             modifier
                 .fillMaxSize()
-                .navigationBarsPadding(bottomSwitch)
+                .navigationBarsPadding()
 //                .nestedScroll(nestedScrollConnection)
         ) {
             HorizontalPager(

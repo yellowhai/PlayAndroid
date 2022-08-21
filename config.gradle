@@ -3,9 +3,9 @@ ext{
 
     //android构建配置
     android_models = [
-            compileSdk : 31,
+            compileSdk : 32,
             minSdk : 23,
-            targetSdk : 31,
+            targetSdk : 32,
             versionCode : 1,
             versionName : "1.0"
     ]
@@ -28,7 +28,7 @@ ext{
     XXPermissions_version = '13.2'
     datastore_version = '1.0.0'
     materialDialog_version = '0.6.2'
-    accompanist_version = '0.24.3-alpha'
+    accompanist_version = '0.25.0'
 
 
     jetpack_compose = [

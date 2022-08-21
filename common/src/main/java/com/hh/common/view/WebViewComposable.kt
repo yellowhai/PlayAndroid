@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,19 +19,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.google.accompanist.web.AccompanistWebChromeClient
+import com.google.accompanist.web.AccompanistWebViewClient
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
-import com.google.accompanist.insets.ui.TopAppBar
 import com.hh.common.R
 import com.hh.common.bean.ModelPath
 import com.hh.common.ext.filterHtml
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
 import com.hh.common.util.CpNavigation
+import com.hh.common.util.logE
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 /**
  * @Description: todo
@@ -68,7 +70,7 @@ fun HhfWebView(
         )
     }
     Column(modifier.background(HhfTheme.colors.background)) {
-        TopAppBar(
+        HhTopAppBar(
             {
                 MarqueeText(
                     title.filterHtml(),
@@ -79,7 +81,7 @@ fun HhfWebView(
             },
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = HhfTheme.colors.themeColor,
-            contentPadding = rememberInsetsPaddingValues(LocalWindowInsets.current.statusBars),
+            contentPadding = WindowInsets.statusBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top).asPaddingValues(),
             navigationIcon =
             {
                 IconButton(
@@ -105,10 +107,25 @@ fun HhfWebView(
         var progress by remember{ mutableStateOf(1f)}
         var complete by remember{ mutableStateOf(false)}
         val scope = rememberCoroutineScope()
+        val webChromeClient = object : AccompanistWebChromeClient(){
+
+        }
+        val webClient = object : AccompanistWebViewClient(){
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
+                if (url.startsWith("http:") || url.startsWith("https:")) {
+                    return false
+                }
+                return false
+            }
+        }
         BoxWithConstraints(Modifier.weight(1f)) {
+            url.logE()
             WebView(
-                state,
-                Modifier.size(maxWidth,maxHeight),
+                state = state,
+                modifier = Modifier.size(maxWidth,maxHeight),
                 onCreated = {
                     it.settings.javaScriptEnabled = true
                     it.setBackgroundColor(0)
@@ -123,6 +140,11 @@ fun HhfWebView(
                             }
                         }
                     }
+                },
+                chromeClient = webChromeClient,
+                client = webClient,
+                onDispose = {
+
                 }
             )
             if(!complete){

@@ -12,7 +12,6 @@ import androidx.compose.animation.core.TweenSpec
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -122,7 +121,7 @@ fun HhfTheme(
             shapes = Shapes,
             typography = typography
         ) {
-            ProvideWindowInsets(content = content)
+            content.invoke()
         }
     }
 }

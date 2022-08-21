@@ -17,14 +17,11 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.google.accompanist.insets.ui.TopAppBar
 import com.hh.common.bean.ModelPath
 import com.hh.common.theme.HhfTheme
 import com.hh.common.util.CacheUtils
@@ -52,19 +49,79 @@ var appTheme by mutableStateOf(Color(CacheUtils.themeColor))
 var isNight by mutableStateOf(CacheUtils.isNight)
 
 @Composable
+fun HhTopAppBar(
+    title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    navigationIcon: @Composable (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
+    backgroundColor: Color = MaterialTheme.colors.primarySurface,
+    contentColor: Color = contentColorFor(backgroundColor),
+    elevation: Dp = AppBarDefaults.TopAppBarElevation,
+) {
+    TopAppBarSurface(
+        modifier = modifier,
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
+        elevation = elevation
+    ) {
+        TopAppBarContent(
+            title = title,
+            navigationIcon = navigationIcon,
+            actions = actions,
+            modifier = Modifier.padding(contentPadding)
+        )
+    }
+}
+
+@Composable
+fun TopAppBarSurface(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colors.primarySurface,
+    contentColor: Color = contentColorFor(backgroundColor),
+    elevation: Dp = AppBarDefaults.TopAppBarElevation,
+    content: @Composable () -> Unit,
+) {
+    Surface(
+        color = backgroundColor,
+        contentColor = contentColor,
+        elevation = elevation,
+        modifier = modifier,
+        content = content
+    )
+}
+
+@Composable
+fun TopAppBarContent(
+    title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    navigationIcon: @Composable (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
+) {
+    TopAppBar(
+        title = title,
+        navigationIcon = navigationIcon,
+        actions = actions,
+        backgroundColor = Color.Transparent,
+        elevation = 0.dp,
+        modifier = modifier
+    )
+}
+
+@Composable
 fun CpTopBar(
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.Transparent,
     title: String,
     back: (() -> Unit)? = null
 ) {
-    TopAppBar(
+    HhTopAppBar(
         {
             Text(title, color = Color.White)
         },
         modifier = modifier,
         backgroundColor = backgroundColor,
-        contentPadding = rememberInsetsPaddingValues(LocalWindowInsets.current.statusBars),
+        contentPadding = WindowInsets.statusBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top).asPaddingValues(),
         navigationIcon = back?.run {
             {
                 IconButton(
@@ -88,13 +145,13 @@ fun CpTopBar(
     actions: @Composable RowScope.() -> Unit = {},
     back: (() -> Unit)? = null
 ) {
-    TopAppBar(
+    HhTopAppBar(
         {
             Text(title, color = Color.White)
         },
         modifier = modifier,
         backgroundColor = backgroundColor,
-        contentPadding = rememberInsetsPaddingValues(LocalWindowInsets.current.statusBars),
+        contentPadding = WindowInsets.statusBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top).asPaddingValues(),
         navigationIcon = back?.run {
             {
                 IconButton(
