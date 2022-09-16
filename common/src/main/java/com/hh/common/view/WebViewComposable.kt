@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -108,17 +109,31 @@ fun HhfWebView(
         var complete by remember{ mutableStateOf(false)}
         val scope = rememberCoroutineScope()
         val webChromeClient = object : AccompanistWebChromeClient(){
-
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                super.onProgressChanged(view, newProgress)
+                progress = newProgress/100.toFloat()
+                scope.launch {
+                    delay(500L)
+                    if(newProgress == 100){
+                        complete = true
+                    }
+                }
+            }
         }
         val webClient = object : AccompanistWebViewClient(){
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
-                if (url.startsWith("http:") || url.startsWith("https:")) {
-                    return false
+                request?.apply {
+                    return if(request.url.toString().startsWith("http:") || request.url.toString().startsWith("https:")){
+                        view!!.loadUrl(request.url.toString())
+                        false
+                    } else{
+                        true
+                    }
                 }
-                return false
+                return super.shouldOverrideUrlLoading(view, request)
             }
         }
         BoxWithConstraints(Modifier.weight(1f)) {
@@ -128,23 +143,19 @@ fun HhfWebView(
                 modifier = Modifier.size(maxWidth,maxHeight),
                 onCreated = {
                     it.settings.javaScriptEnabled = true
+                    // h5
+                    it.settings.domStorageEnabled = true
+                    //http img
+                    it.settings.blockNetworkImage = false
+                    it.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+
+                    it.settings.defaultTextEncodingName = "UTF-8"
+                    it.settings.javaScriptCanOpenWindowsAutomatically = true
                     it.setBackgroundColor(0)
-                    it.webChromeClient = object : WebChromeClient() {
-                        override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                            progress = newProgress/100.toFloat()
-                            scope.launch {
-                                delay(500L)
-                                if(newProgress == 100){
-                                    complete = true
-                                }
-                            }
-                        }
-                    }
                 },
                 chromeClient = webChromeClient,
                 client = webClient,
                 onDispose = {
-
                 }
             )
             if(!complete){

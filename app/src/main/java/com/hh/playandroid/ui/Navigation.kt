@@ -45,8 +45,8 @@ import com.hh.playandroid.ui.search.result.SearchResultView
 fun HhfNavigation() {
     AnimatedNavHost(navController = CpNavigation.navHostController,
         startDestination = ModelPath.Main.route,
-        enterTransition = { fadeIn(animationSpec = tween(1000), initialAlpha = 0f) },
-        exitTransition = { fadeOut(animationSpec = tween(1000), targetAlpha = 0f) }) {
+        enterTransition = { fadeIn(animationSpec = tween(700), initialAlpha = 0f) },
+        exitTransition = { fadeOut(animationSpec = tween(700), targetAlpha = 0f) }) {
         composable(ModelPath.Main.route) {
             MainContent()
         }

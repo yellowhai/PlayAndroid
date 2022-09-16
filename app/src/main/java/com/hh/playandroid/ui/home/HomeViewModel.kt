@@ -1,5 +1,7 @@
 package com.hh.playandroid.ui.home
 
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -7,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.hh.common.api.CommonApiService
 import com.hh.common.api.TaskApi
 import com.hh.common.base.BaseViewModel
@@ -25,7 +29,9 @@ import kotlinx.coroutines.launch
  * @CreateDate: 2022/3/7  10:10
  */
 class HomeViewModel : BaseViewModel() {
-    var viewStates by mutableStateOf(HomeState())
+    var viewStates by mutableStateOf(HomeState(homeList = Pager(
+        PagingConfig(PAGE_SIZE),
+        pagingSourceFactory = { HomeSource() }).flow.cachedIn(viewModelScope)))
         private set
 
     fun dispatch(action: HomeAction) {
@@ -34,7 +40,6 @@ class HomeViewModel : BaseViewModel() {
             is HomeAction.Collect -> collect(action.h,action.s)
         }
     }
-
     private fun collect(h :Int, isCollect : Boolean){
         launch({
             if(isCollect){
@@ -46,6 +51,7 @@ class HomeViewModel : BaseViewModel() {
         },{
 
         })
+        viewModelScope
     }
 
     private fun getBanner() {
@@ -79,5 +85,5 @@ data class HomeState(
     val bannerList: List<BannerResponse> = listOf(),
     val homeList: Flow<PagingData<ArticleBean>> = Pager(
         PagingConfig(PAGE_SIZE),
-        pagingSourceFactory = { HomeSource() }).flow
+        pagingSourceFactory = { HomeSource() }).flow,
 )
